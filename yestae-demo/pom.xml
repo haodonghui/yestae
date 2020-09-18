@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yestae</groupId>
+    <artifactId>yestae-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>yestae-demo-dubbo-service</module>
+        <module>yestae-demo-sdk</module>
+        <module>yestae-demo-consumer</module>
+        <module>yestae-demo-cloud-eureka</module>
+        <module>yestae-demo-cloud</module>
+        <module>yestae-demo-cloud-dubbo</module>
+        <module>yestae-demo-spring-Boot-Admin</module>
+        <module>yestae-demo-cloud-parent</module>
+    </modules>
+
+    <!--在这里设置打包类型为pom，作用是为了实现多模块项目-->
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.7.RELEASE</version>
+    </parent>
+
+
+    <!-- 设置我们项目的一些版本属性 -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <dubbo.version>2.5.5</dubbo.version>
+        <zkclient.version>0.10</zkclient.version>
+        <lombok.version>1.16.22</lombok.version>
+        <fastjson.version>1.2.31</fastjson.version>
+        <spring-boot.version>2.0.7.RELEASE</spring-boot.version>
+        <spring.cloud.dependencies.version>Finchley.RELEASE</spring.cloud.dependencies.version>
+        <spring.cloud.start.version>1.4.7.RELEASE</spring.cloud.start.version>
+        <slf4j.api.version>1.7.25</slf4j.api.version>
+        <yestae.framework.version>1.0-SNAPSHOT</yestae.framework.version>
+    </properties>
+    <!--
+        <distributionManagement>            <repository>
+
+                <id>yestae-release</id>
+                <name>yestae-release</name>
+                <url>http://192.168.100.221:9905/nexus/content/repositories/yestae-release/</url>
+        </repository>
+        </distributionManagement>-->
+    <!-- 声明一些项目依赖管理，方便我们的依赖版本管理 -->
+    <dependencyManagement>
+
+        <dependencies>
+
+            <dependency>
+                <groupId>com.yestae.framework</groupId>
+                <artifactId>yestae-framework-rabbit</artifactId>
+                <version>${yestae.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yestae.framework</groupId>
+                <artifactId>yestae-framework-businesslog</artifactId>
+                <version>${yestae.framework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.api.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- Springboot依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <!-- Springboot-web依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <!-- 使用lombok实现JavaBean的get、set、toString、hashCode、equals等方法的自动生成  -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Dubbo依赖 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <!-- zookeeper的客户端依赖 -->
+            <dependency>
+                <groupId>com.101tec</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version>
+            </dependency>
+
+            <!-- ribbon -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-ribbon</artifactId>
+                <version>${spring.cloud.start.version}</version>
+            </dependency>
+
+            <!-- eureka -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-eureka</artifactId>
+                <version>${spring.cloud.start.version}</version>
+            </dependency>
+            <!-- feign -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-feign</artifactId>
+                <version>${spring.cloud.start.version}</version>
+            </dependency>
+
+            <!-- actuator -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+            </dependency>
+
+
+
+
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <!-- 默认是本地开发环境 -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 测试环境 -->
+            <id>test</id>
+            <properties>
+                <profiles.active>test</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 生产环境 -->
+            <id>pro</id>
+            <properties>
+                <profiles.active>pro</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!--
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    -->
+</project>

@@ -1,0 +1,196 @@
+package ${package}.${moduleName}.controller;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections.MapUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ${mainPath}.common.annotation.SysLog;
+import ${mainPath}.common.exception.RRException;
+import ${mainPath}.common.utils.Constant;
+import ${mainPath}.common.utils.NumberUtils;
+import ${mainPath}.common.utils.PageUtils;
+import ${mainPath}.common.utils.R;
+import ${mainPath}.common.utils.excel.ExcelSheet;
+import ${package}.fields.entity.SysFieldsAspectEntity;
+import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.service.${className}Service;
+import ${package}.sys.controller.AbstractController;
+
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@RestController
+@RequestMapping("${moduleName}/${pathName}")
+@Api(value = "${classname}", description = "${comments}", produces = "application/json")
+public class ${className}Controller extends AbstractController {
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    private ${className}Service ${classname}Service;
+
+    /**
+     * 查询${comments}列表
+     */
+	@SysLog("查询${comments}")
+    @GetMapping("/list")
+    @RequiresPermissions("${moduleName}:${pathName}:list")
+    @ApiOperation(value = "查询${comments}列表", notes = "查询${comments}列表", produces = "application/json",hidden=false)
+    @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header")
+    public R list(@ApiParam ( name="params",value="{\"page\":1,\"limit\":10,\"sidx\":\"${pk.attrname}\",\"order\":\"desc\"}",required=true)
+                  @RequestParam Map<String, Object> params){
+		try {
+	        //params.put("sidx", "create_date");//排序字段
+	        //params.put("order", "desc");//排序方案 降序-desc 升序-asc
+	        
+	        String moduleCode = MapUtils.getString(params, Constant.MODULECODE);
+	        params.put(Constant.OPERATE_TYPE, "query");
+	        PageUtils page = ${classname}Service.queryPage(params);
+	
+	        return super.list(page, moduleCode,null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.error(e.getMessage());
+		}
+    }
+
+
+    /**
+     * 获取${comments}信息
+     */
+    @GetMapping("/info/{${pk.attrname}}")
+    @RequiresPermissions("${moduleName}:${pathName}:info")
+    @ApiOperation(value = "获取${comments}信息", notes = "获取${comments}信息", produces = "application/json",hidden=false)
+    @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header")
+    public R info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
+		try {
+			${className}Entity ${classname} = ${classname}Service.getById(${pk.attrname});
+	        return R.ok().put("${classname}", ${classname});
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.error(e.getMessage());
+		}
+    }
+
+    /**
+     * 保存${comments}
+     */
+	@SysLog("保存${comments}")
+    @PostMapping("/save")
+    @RequiresPermissions("${moduleName}:${pathName}:save")
+    @ApiOperation(value = "保存${comments}", notes = "保存${comments}", produces = "application/json",hidden=false)
+    @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header")
+    public R save(@ApiParam ( name="${classname}", value="",required=true)
+                  @RequestBody ${className}Entity ${classname}){
+		try {
+			${classname}Service.save(${classname});
+	        return R.ok();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.error(e.getMessage());
+		}
+    }
+
+    /**
+     * 修改${comments}
+     */
+	@SysLog("修改${comments}")
+    @PostMapping("/update")
+    @RequiresPermissions("${moduleName}:${pathName}:update")
+    @ApiOperation(value = "修改${comments}", notes = "修改${comments}", produces = "application/json",hidden=false)
+    @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header")
+    public R update(@ApiParam ( name="${classname}", value="",required=true)
+                    @RequestBody ${className}Entity ${classname}){
+		try {
+			${classname}Service.update(${classname});
+	        return R.ok();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.error(e.getMessage());
+		}
+    }
+
+    /**
+     * 删除${comments}
+     */
+	@SysLog("删除${comments}")
+    @PostMapping("/delete")
+    @RequiresPermissions("${moduleName}:${pathName}:delete")
+    @ApiOperation(value = "删除${comments}", notes = "删除${comments}", produces = "application/json",hidden=false)
+    @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header")
+    public R delete(@ApiParam ( name="${pk.attrname}s", value="",required=true)
+                    @RequestBody ${pk.attrType}[] ${pk.attrname}s){
+		try {
+			${classname}Service.removeByIds(Arrays.asList(${pk.attrname}s));
+	        return R.ok();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.error(e.getMessage());
+		}
+    }
+
+    /**
+     * 导出${comments}
+     */
+	@SysLog("导出${comments}")
+    @GetMapping("/exportXls")
+//    @RequiresPermissions("${moduleName}:${pathName}:export")
+    @ApiOperation(value = "导出${comments}", notes = "导出${comments}", produces = "application/json",hidden=false)
+    @ApiImplicitParam(name = "token", value = "token", required = false, dataType = "string", paramType = "header")
+    public void exportXls(@ApiParam ( name="params",value="{\"page\":1,\"limit\":10,\"sidx\":\"id\",\"order\":\"desc\",\n\"exportTitles\":\"用户昵称,订单总金额\",\n\"exportFields\":\"userName,consumeAmount\"} \n exportTitles和exportFields为空默认导出全部字段",required=true)
+                  @RequestParam Map<String, Object> params){
+		try {
+	         //params.put("sidx", "create_date");//排序字段
+	        //params.put("order", "desc");//排序方案 降序-desc 升序-asc
+			
+	//        String moduleCode = "${pathName}";
+	        String moduleCode = MapUtils.getString(params, Constant.MODULECODE);
+	        params.put(Constant.MODULECODE, moduleCode);
+	        params.put(Constant.OPERATE_TYPE, "export");
+	        PageUtils page = ${classname}Service.queryPage(params);
+	
+	        List list = page.getList();
+	        
+	        Map<String, String> dataPattern = new HashMap<String, String>();
+	//        dataPattern.put("地市", DateUtils.DATE_PATTERN_DAY);
+	//        dataPattern.put("金额", NumberUtils.DEFAULT_NUMBER_PATTERN);
+			
+			List<SysFieldsAspectEntity> outputFields = getOutputFields(moduleCode);
+			ExcelSheet sheet = new ExcelSheet(outputFields,list, dataPattern , "${comments}");
+			List<ExcelSheet> sheets = new ArrayList<ExcelSheet>();
+			sheets.add(sheet);
+	
+			downloadXls(sheets,"${comments}");
+        } catch (Exception e) {
+			e.printStackTrace();
+        	throw new RRException(e.getMessage());
+        }
+    }
+
+}

@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8765/eureka/
+      #defaultZone: http://peer1:8761/eureka/,http://peer2:8762/eureka/
+#      defaultZone:  http://eureka.tae-tea.net:8085/eureka/
+  instance:
+    prefer-ip-address: true # 优先注册IP地址而不是hostname
+#  healthcheck:
+#    enabled: true # 启用健康检查,注意:需要引用spring boot actuator
+
+spring:
+  application:
+    name: test-dubbo-cloud

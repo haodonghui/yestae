@@ -1,0 +1,67 @@
+package ${package}.${moduleName}.service.impl;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Date;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.yestae.common.datasource.service.ServiceImpl;
+import com.google.gson.Gson;
+import ${mainPath}.common.utils.PageUtils;
+import ${mainPath}.common.utils.Query;
+import ${mainPath}.datasource.annotation.DataSource;
+
+import ${package}.${moduleName}.dao.${className}Dao;
+import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.service.${className}Service;
+
+/**
+ * ${comments}
+ * 根据数据源手动配置 @DataSource("slave1")并继承对应的ServiceImpl* 比如数据源1：继承ServiceImplSava1  据源2：继承ServiceImplSava2
+ * 默认数据源无需配置
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Service("${classname}Service")
+//@DataSource("slave1")
+public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${className}Entity> implements ${className}Service {
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Override
+    public PageUtils queryPage(Map<String, Object> params) throws Exception{
+    	IPage iPage = new Query<${className}Entity>().getPage(params);
+    	QueryWrapper queryWrapper = new QueryWrapper<${className}Entity>();
+//    	添加需要查询的字段
+    	addSelectFields(queryWrapper, params);
+//    	添加条件
+    	addConditionWrapper(queryWrapper, params);
+//    	添加分组
+    	addGroupWrapper(queryWrapper, params);
+
+//		添加排序
+    	addOrderWrapper(queryWrapper, params, iPage);
+
+    	if(iPage.getSize() == -1){//如果limit=-1 不分页查询
+        	List<Map<String, Object>> list = this.listMaps(queryWrapper);
+            return new PageUtils(list, list.size(), list.size(), 1);
+    	}
+
+    	IPage<Map<String, Object>> page = this.pageMaps(iPage,queryWrapper);
+
+        return new PageUtils(page);
+    }
+    
+	@Override
+	@Transactional
+	public void update(${className}Entity ${classname}) throws Exception{
+		this.updateById(${classname});
+	}
+
+}

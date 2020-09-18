@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>yestae-mall</groupId>
+	<artifactId>yestae-mall</artifactId>
+	<version>v2.0.0</version>
+	<packaging>pom</packaging>
+	<distributionManagement>
+		<repository>
+			<id>yestae-release</id>
+			<name>yestae-release</name>
+			<url>http://192.168.100.221:9905/nexus/content/repositories/yestae-release/</url>
+		</repository>
+	</distributionManagement>
+	<modules>
+		<module>../../user-sdk/user-service-sdk</module>
+		<module>../../business-common/business-common</module>
+		<!-- <module>../../user-service/user-service</module> -->
+		<module>../../goods-sdk/yestae-goods-sdk</module>
+		<!-- <module>../../goods-service/yestae-goods-service</module> -->
+		<module>../../coupon_api/yestae-coupon-sdk</module>
+		<!-- <module>../../coupon_service/yestae-coupon-service</module> -->
+		<module>../../rest-service/yestae-rest-service</module>
+		<module>../../ebs-rest/yestae-app-rest</module>
+		<module>../../wxm-rest/yestae-wxma-rest</module>
+		<module>../../order-sdk/yestae-order-sdk</module>
+		<module>../../order-service/yestae-order-service</module>
+		<!-- <module>../../bridge-service/yestae-bridge-service</module> -->
+		<module>../../order-app-service/yestae-order-app-service</module>
+		<module>../../order-poly-service/yestae-order-poly-service</module>
+		<module>../../poly-rest/yestae-order-rest</module>
+		<module>../../mall-pc-rest/yestae-pc-rest</module>
+		<module>../../box-sdk/yestae-box-sdk</module>
+		<!-- <module>../../box-service/yestae-box-service</module> -->
+		<module>../../cart-sdk/yestae-cart-sdk</module>
+		<!-- <module>../../cart-service/yestae-cart-service</module> -->
+		<module>../../assist-sdk/yestae-assist-sdk</module>
+		<!-- <module>../../assist-service/yestae-assist-service</module> -->
+		<module>../../pay-sdk</module>
+		<!-- <module>../../pay-service</module> -->
+		<module>../../pay-rest</module>
+		<module>../../support-rest/yestae-support-rest</module>
+		<!-- <module>../../invoice-sdk/yestae-invoice-sdk</module>
+		<module>../../invoice-service/yestae-invoice-service</module> -->
+	</modules>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- libs -->
+		<junit.version>4.11</junit.version>
+		<spring.version>4.3.3.RELEASE</spring.version>
+		<aspectjrt.version>1.8.9</aspectjrt.version>
+		<aspectjweaver.version>1.8.10</aspectjweaver.version>
+
+		<mybatis-spring.version>1.3.1</mybatis-spring.version>
+		<mybatis.version>3.4.4</mybatis.version>
+		<mybatis-plus.version>2.1-gamma</mybatis-plus.version>
+
+		<logback-classic.version>1.1.7</logback-classic.version>
+		<logback-ext-spring.version>0.1.4</logback-ext-spring.version>
+		<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
+		<log4j-over-slf4j.version>1.7.7</log4j-over-slf4j.version>
+		<slf4j_version>1.7.21</slf4j_version>
+		<javassist.version>3.12.1.GA</javassist.version>
+
+		<servlet-api.version>3.1.0</servlet-api.version>
+		<druid.version>1.1.0</druid.version>
+		<mysql-connector-java.version>5.1.38</mysql-connector-java.version>
+		<dubbo.version>2.5.3</dubbo.version>
+		<fastjson.version>1.2.17</fastjson.version>
+		<guava.version>18.0</guava.version>
+		<commons-lang.version>2.6</commons-lang.version>
+		<commons-io.version>2.5</commons-io.version>
+		<commons-lang3.version>3.3.1</commons-lang3.version>
+		<commons-configuration.version>1.10</commons-configuration.version>
+		<commons-codec.version>1.6</commons-codec.version>
+		<cglib.version>3.2.2</cglib.version>
+
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- Spring libs Begin -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<!-- Spring libs end -->
+			<!-- Spring aop libs Begin -->
+			<dependency>
+				<groupId>aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>${aspectjrt.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectjweaver.version}</version>
+			</dependency>
+			<!-- Spring aop libs End -->
+			<!-- MyBatis libs Begin -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>${mybatis-spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus</artifactId>
+				<version>${mybatis-plus.version}</version>
+			</dependency>
+			<!-- MyBatis libs End -->
+			<!-- log libs begin -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback-classic.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.logback-extensions</groupId>
+				<artifactId>logback-ext-spring</artifactId>
+				<version>${logback-ext-spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${jcl-over-slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${log4j-over-slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>${javassist.version}</version>
+			</dependency>
+			<!-- log libs end -->
+			<!-- mysql libs begin -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql-connector-java.version}</version>
+			</dependency>
+			<!-- mysql libs end -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet-api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>${dubbo.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commons-lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-configuration</groupId>
+				<artifactId>commons-configuration</artifactId>
+				<version>${commons-configuration.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons-codec.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>${cglib.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>2.8.8</version>
+			</dependency>
+			<dependency>
+				<groupId>com.101tec</groupId>
+				<artifactId>zkclient</artifactId>
+				<version>0.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-core</artifactId>
+				<version>1.3</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache-core</artifactId>
+				<version>2.6.11</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>mongo-java-driver</artifactId>
+				<version>3.4.2</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+
+	<!-- clean package -DskipTests -Predis-config -->
+	<!-- <profiles> <profile> 本地 <id>redis-config</id> <properties> <redis.host>127.0.0.1</redis.host> 
+		<redis.port>6379</redis.port> </properties> </profile> <profile> 生产环境 <id>redis_config</id> 
+		<properties> <redis.host>10.126.55.123</redis.host> <redis.port>6379</redis.port> 
+		</properties> </profile> </profiles> -->
+
+	<build>
+		<!-- <resources> <resource> <directory>src/main/resources/</directory> 
+			<filtering>true</filtering> <includes> <include>**/*.properties</include> 
+			</includes> </resource> </resources> -->
+
+		<plugins>
+			<plugin>
+				<!-- 编译插件 -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- 发布插件 -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+			<plugin>
+				<!-- 打包插件 -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+			</plugin>
+			<plugin>
+				<!-- 安装插件 -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.3.1</version>
+			</plugin>
+			<plugin>
+				<!-- 单元测试插件 -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.7.2</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+<!-- 			<plugin>
+				源码插件
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1</version>
+				发布时自动将源码同时发布的配置
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> -->
+		</plugins>
+	</build>
+</project>

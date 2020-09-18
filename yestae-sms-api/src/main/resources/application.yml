@@ -1,0 +1,55 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 8088
+  connection-timeout: 5000ms
+  servlet:
+    context-path: /sms-api
+
+spring:
+  # \u73af\u5883 dev|test|prod
+  profiles:
+    active: @activatedProperties@
+  # jackson\u65f6\u95f4\u683c\u5f0f\u5316
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+#  resources:
+#    add-mappings: false
+
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+#  mapperLocations: classpath*:**/mybatis/*/*.xml
+#  configLocation: classpath:mybatis.xml
+  #\u5b9e\u4f53\u626b\u63cf\uff0c\u591a\u4e2apackage\u7528\u9017\u53f7\u6216\u8005\u5206\u53f7\u5206\u9694
+  typeAliasesPackage: com.yestae.modules.*.entity
+  global-config:
+    #\u6570\u636e\u5e93\u76f8\u5173\u914d\u7f6e
+    db-config:
+      #\u4e3b\u952e\u7c7b\u578b  AUTO:"\u6570\u636e\u5e93ID\u81ea\u589e", INPUT:"\u7528\u6237\u8f93\u5165ID", ID_WORKER:"\u5168\u5c40\u552f\u4e00ID (\u6570\u5b57\u7c7b\u578b\u552f\u4e00ID)", UUID:"\u5168\u5c40\u552f\u4e00ID UUID";
+      id-type: AUTO
+      #\u5b57\u6bb5\u7b56\u7565 IGNORED:"\u5ffd\u7565\u5224\u65ad",NOT_NULL:"\u975e NULL \u5224\u65ad"),NOT_EMPTY:"\u975e\u7a7a\u5224\u65ad"
+      field-strategy: NOT_NULL
+      #\u9a7c\u5cf0\u4e0b\u5212\u7ebf\u8f6c\u6362
+      column-underline: true
+      logic-delete-value: -1
+      logic-not-delete-value: 0
+    banner: false
+  #\u539f\u751f\u914d\u7f6e
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'

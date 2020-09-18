@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 短信渠道产品（一个产品多个渠道）
+ -->
+<mapper namespace="com.yestae.modules.sms.dao.SmsPipeProductDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.yestae.modules.sms.entity.SmsPipeProductEntity" id="smsPipeProductMap">
+        <result property="id" column="id"/>
+        <result property="pipeId" column="pipe_id"/>
+        <result property="pipeCode" column="pipe_code"/>
+        <result property="pipeName" column="pipe_name"/>
+        <result property="pipeProductCode" column="pipe_product_code"/>
+        <result property="pipeProductName" column="pipe_product_name"/>
+        <result property="pipeProductApi" column="pipe_product_api"/>
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="priorityLevel" column="priority_level"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+
+</mapper>

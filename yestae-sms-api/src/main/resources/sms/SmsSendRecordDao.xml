@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 短信发送记录 -->
+<mapper namespace="com.yestae.modules.sms.dao.SmsSendRecordDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.yestae.modules.sms.entity.SmsSendRecordEntity" id="smsSendRecordMap">
+        <result property="id" column="id"/>
+        <result property="platformCode" column="platform_code"/>
+        <result property="platformName" column="platform_name"/>
+        <result property="signName" column="sign_name"/>
+        <result property="pipeCode" column="pipe_code"/>
+        <result property="pipeName" column="pipe_name"/>
+        <result property="pipeProductCode" column="pipe_product_code"/>
+        <result property="pipeProductName" column="pipe_product_name"/>
+        <result property="bizSmsType" column="biz_sms_type"/>
+        <result property="bizSmsTypeName" column="biz_sms_type_name"/>
+        <result property="bizSmsContent" column="biz_sms_content"/>
+        <result property="sendTime" column="send_time"/>
+    </resultMap>
+
+
+</mapper>

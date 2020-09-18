@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>益友会代码生成器</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="plugins/jqgrid/ui.jqgrid-bootstrap.css">
+<link rel="stylesheet" href="css/main.css">
+<script src="libs/jquery.min.js"></script>
+<script src="plugins/layer/layer.js"></script>
+<script src="libs/bootstrap.min.js"></script>
+<script src="libs/vue.min.js"></script>
+<script src="plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="js/common.js"></script>
+</head>
+<body>
+<div id="rrapp">
+	<div class="grid-btn">
+		<div class="form-group col-sm-2">
+			<input type="text" class="form-control" v-model="q.tableName" @keyup.enter="query" placeholder="表名">
+		</div>
+		<a class="btn btn-default" @click="query">查询</a>
+		<a class="btn btn-primary" @click="generator"><i class="fa fa-file-code-o"></i>&nbsp;生成代码</a>
+		<a class="btn btn-primary" @click="showdiv"><i class="fa fa-file-code-o"></i>&nbsp;指定生成代码</a>
+	</div>
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+ <div class="modal-dialog" role="document">
+  <div class="modal-content">
+  <div class="modal-header">
+   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+<!--    <h4 class="modal-title" id="myModalLabel">排序</h4> -->
+<!--    <h5 class="modal-title" id="myModalLabel" style="color: red; "> -->
+<!--    格式：字段名:字段中文名:是否是查询条件(q)，多条记录中间用分号(;)隔开 -->
+<!--    </h5> -->
+  </div>
+  <div class="modal-body">
+   <div class="form-group">
+   	包名：<input type="text" id="subpackage" name="subpackage" value=""/>
+   </div>
+<!--    <div class="form-group"> -->
+<!--    	字段列表：<textarea id="sortFields" rows="5" cols="80"></textarea> -->
+<!--    </div> -->
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+   
+   <button type="button" id="btn_submit" onclick="generatorNew()" class="btn btn-primary" data-dismiss="modal"><span class="fa fa-file-code-o" aria-hidden="true">确定</span></button>
+  </div>
+  </div>
+ </div>
+ </div>
+<script src="js/generator.js"></script>
+</body>
+</html>

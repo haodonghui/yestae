@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>yestae-core</groupId>
+		<artifactId>yestae-core</artifactId>
+		<version>v2.0.0</version>
+	</parent>
+	<artifactId>yestae-redis</artifactId>
+	<name>yestae-redis</name>
+
+	<profiles>
+		<profile>
+			<!-- 本地 -->
+			<id>redis-config-local</id>
+			<properties>
+				<redis.pool.maxTotal>100000</redis.pool.maxTotal>
+				<redis.pool.maxIdle>200</redis.pool.maxIdle>
+				<redis.pool.minIdle>10</redis.pool.minIdle>
+				<redis.pool.maxWaitMillis>-1</redis.pool.maxWaitMillis>
+				<redis.pool.testOnBorrow>true</redis.pool.testOnBorrow>
+				<redis.pool.testOnReturn>true</redis.pool.testOnReturn>
+				<redis.host>192.168.100.223</redis.host>
+				<redis.port>6379</redis.port>
+				<redis.timeout>200000</redis.timeout>
+				<redis.password>123456</redis.password>
+				<redis.database>6</redis.database>
+				
+				<redis.sentinels>127.0.0.1:1234$$127.0.0.2:2234$$127.0.0.3:3234</redis.sentinels>
+				<redis.masterName>yestae_master</redis.masterName>
+				
+				<redis.connectionTimeout>20000</redis.connectionTimeout>
+				<redis.soTimeout>20000</redis.soTimeout>
+				<redis.maxAttempts>20000</redis.maxAttempts>
+				<redis.clusterPort>6379</redis.clusterPort>
+				<redis.clusterAddresses>127.0.0.1:1234$$127.0.0.2:2234$$127.0.0.3:3234</redis.clusterAddresses>
+				
+			</properties>
+		</profile>
+		<profile>
+			<!-- 生产环境 -->
+			<id>redis-config-online</id>
+			<properties>
+				<redis.pool.maxTotal>100000</redis.pool.maxTotal>
+				<redis.pool.maxIdle>200</redis.pool.maxIdle>
+				<redis.pool.minIdle>10</redis.pool.minIdle>
+				<redis.pool.maxWaitMillis>-1</redis.pool.maxWaitMillis>
+				<redis.pool.testOnBorrow>true</redis.pool.testOnBorrow>
+				<redis.pool.testOnReturn>true</redis.pool.testOnReturn>
+				<redis.host>192.168.100.223</redis.host>
+				<redis.port>6379</redis.port>
+				<redis.timeout>200000</redis.timeout>
+				<redis.password>123456</redis.password>
+				<redis.database>6</redis.database>
+				
+				<redis.sentinels>127.0.0.1:1234$$127.0.0.2:2234$$127.0.0.3:3234</redis.sentinels>
+				<redis.masterName>yestae_master</redis.masterName>
+				
+				<redis.connectionTimeout>20000</redis.connectionTimeout>
+				<redis.soTimeout>20000</redis.soTimeout>
+				<redis.maxAttempts>20000</redis.maxAttempts>
+				<redis.clusterPort>6379</redis.clusterPort>
+				<redis.clusterAddresses>127.0.0.1:1234$$127.0.0.2:2234$$127.0.0.3:3234</redis.clusterAddresses>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources/</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>yestae-core</groupId>
+			<artifactId>yestae-tools</artifactId>
+			<version>v2.0.0</version>
+		</dependency>
+	</dependencies>
+
+</project>
